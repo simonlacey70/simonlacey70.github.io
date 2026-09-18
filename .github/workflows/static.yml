@@ -21,8 +21,8 @@ jobs:
       - uses: actions/configure-pages@v5
       - name: Unpack public website
         run: |
-          unzip -q site-preview.zip -d public
-          if [ -f site-reports.zip ]; then unzip -oq site-reports.zip -d public; fi
+          mkdir -p public
+          for archive in site-*.zip; do unzip -oq "$archive" -d public; done
       - uses: actions/upload-pages-artifact@v4
         with:
           path: public
